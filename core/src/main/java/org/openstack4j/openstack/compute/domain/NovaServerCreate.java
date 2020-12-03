@@ -32,7 +32,9 @@ public class NovaServerCreate implements ServerCreate {
     private String flavorRef;
     private String accessIPv4;
     private String accessIPv6;
+    @JsonProperty("min_count")
     private Integer min;
+    @JsonProperty("max_count")
     private Integer max;
     private DiskConfig diskConfig;
     @JsonProperty("metadata")
@@ -368,11 +370,23 @@ public class NovaServerCreate implements ServerCreate {
         	return this;
         }
 		
-	@Override
-	public ServerCreateBuilder configDrive(boolean configDrive){
-		m.configDrive=configDrive;
-		return this;
-	}
+	    @Override
+	    public ServerCreateBuilder configDrive(boolean configDrive){
+		    m.configDrive=configDrive;
+		    return this;
+	    }
+	    
+	    @Override
+        public ServerCreateBuilder max(int maxCount) {
+            m.max = maxCount;
+            return this;
+        }
+
+        @Override
+        public ServerCreateBuilder min(int minCount) {
+            m.min = minCount;
+            return this;
+        }
         
     }
 }
